@@ -3,7 +3,6 @@ node_modules/
 
 # Build outputs
 build/
-src/tree_sitter/
 
 # Generated files
 *.log
