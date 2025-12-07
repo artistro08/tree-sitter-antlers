@@ -7,3 +7,7 @@
 ; Inject PHP into PHP blocks
 ((php_content) @injection.content
  (#set! injection.language "php"))
+
+; Inject PHP into PHP echo blocks
+((php_echo_content) @injection.content
+ (#set! injection.language "php"))
