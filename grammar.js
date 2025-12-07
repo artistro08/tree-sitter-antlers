@@ -30,8 +30,8 @@ module.exports = grammar({
 
   externals: ($) => [
     $.text,
-    $._antlers_start,
-    $._antlers_end,
+    $.antlers_start,
+    $.antlers_end,
     $.comment_start,
     $.comment_end,
     $.comment_content,
@@ -66,7 +66,7 @@ module.exports = grammar({
 
     // Antlers interpolation {{ ... }}
     antlers_node: ($) =>
-      seq($._antlers_start, optional($._antlers_content), $._antlers_end),
+      seq($.antlers_start, optional($._antlers_content), $.antlers_end),
 
     _antlers_content: ($) =>
       choice(
