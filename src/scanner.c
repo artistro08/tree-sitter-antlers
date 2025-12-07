@@ -46,13 +46,8 @@ static bool is_eof(TSLexer *lexer) {
   return lexer->eof(lexer);
 }
 
-void *tree_sitter_antlers_external_scanner_create() {
-  Scanner *scanner = (Scanner *)ts_malloc(sizeof(Scanner));
-  scanner->in_antlers = false;
-  scanner->in_comment = false;
-  scanner->in_php = false;
-  scanner->in_php_echo = false;
-  scanner->in_noparse = false;
+void *tree_sitter_antlers_external_scanner_create(void) {
+  Scanner *scanner = (Scanner *)ts_calloc(1, sizeof(Scanner));
   return scanner;
 }
 
@@ -63,11 +58,11 @@ void tree_sitter_antlers_external_scanner_destroy(void *payload) {
 
 unsigned tree_sitter_antlers_external_scanner_serialize(void *payload, char *buffer) {
   Scanner *scanner = (Scanner *)payload;
-  buffer[0] = scanner->in_antlers;
-  buffer[1] = scanner->in_comment;
-  buffer[2] = scanner->in_php;
-  buffer[3] = scanner->in_php_echo;
-  buffer[4] = scanner->in_noparse;
+  buffer[0] = (char)scanner->in_antlers;
+  buffer[1] = (char)scanner->in_comment;
+  buffer[2] = (char)scanner->in_php;
+  buffer[3] = (char)scanner->in_php_echo;
+  buffer[4] = (char)scanner->in_noparse;
   return 5;
 }
 
