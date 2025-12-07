@@ -4,9 +4,17 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
+        {
+          "type": "antlers_end",
+          "named": true
+        },
+        {
+          "type": "antlers_start",
+          "named": true
+        },
         {
           "type": "closing_tag",
           "named": true
@@ -2673,6 +2681,14 @@
   {
     "type": "and",
     "named": false
+  },
+  {
+    "type": "antlers_end",
+    "named": true
+  },
+  {
+    "type": "antlers_start",
+    "named": true
   },
   {
     "type": "asc",

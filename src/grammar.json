@@ -44,7 +44,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_antlers_start"
+          "name": "antlers_start"
         },
         {
           "type": "CHOICE",
@@ -60,7 +60,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_antlers_end"
+          "name": "antlers_end"
         }
       ]
     },
@@ -1918,11 +1918,11 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_antlers_start"
+      "name": "antlers_start"
     },
     {
       "type": "SYMBOL",
-      "name": "_antlers_end"
+      "name": "antlers_end"
     },
     {
       "type": "SYMBOL",
