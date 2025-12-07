@@ -1,0 +1,40 @@
+{
+  "name": "tree-sitter-antlers",
+  "version": "1.0.0",
+  "description": "Tree-sitter grammar for Statamic Antlers template language",
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "keywords": [
+    "tree-sitter",
+    "parser",
+    "antlers",
+    "statamic",
+    "template"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "node-addon-api": "^8.0.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.24.0",
+    "prebuildify": "^6.0.0"
+  },
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp rebuild",
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test",
+    "parse": "tree-sitter parse"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.antlers",
+      "file-types": [
+        "antlers.html",
+        "antlers.php"
+      ],
+      "injection-regex": "^antlers$"
+    }
+  ]
+}

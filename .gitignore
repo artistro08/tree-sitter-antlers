@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+build/
+src/parser.c
+src/tree_sitter/
+
+# Generated files
+*.log
+*.node
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Rust
+target/
+Cargo.lock

@@ -1,0 +1,11 @@
+prefix=@PREFIX@
+libdir=@LIBDIR@
+includedir=@INCLUDEDIR@
+
+Name: tree-sitter-antlers
+Description: Tree-sitter grammar for Statamic Antlers template language
+URL: https://github.com/tree-sitter/tree-sitter-antlers
+Version: @VERSION@
+Requires: tree-sitter
+Libs: -L${libdir} -ltree-sitter-antlers
+Cflags: -I${includedir}

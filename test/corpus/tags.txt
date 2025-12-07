@@ -1,0 +1,100 @@
+================================================================================
+Tag with parameter
+================================================================================
+
+{{ collection limit="5" }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (tag
+        (tag_name
+          (identifier))
+        (parameters
+          (parameter
+            name: (parameter_name
+              (identifier))
+            value: (string)))))))
+
+================================================================================
+Tag with method and parameter
+================================================================================
+
+{{ collection:blog limit="5" }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (tag
+        (tag_name
+          (identifier))
+        (tag_method
+          (identifier))
+        (parameters
+          (parameter
+            name: (parameter_name
+              (identifier))
+            value: (string)))))))
+
+================================================================================
+Tag with multiple parameters
+================================================================================
+
+{{ collection:blog limit="5" sort="date" }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (tag
+        (tag_name
+          (identifier))
+        (tag_method
+          (identifier))
+        (parameters
+          (parameter
+            name: (parameter_name
+              (identifier))
+            value: (string))
+          (parameter
+            name: (parameter_name
+              (identifier))
+            value: (string)))))))
+
+================================================================================
+Tag with dynamic binding parameter
+================================================================================
+
+{{ nav :from="segment_1" }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (tag
+        (tag_name
+          (identifier))
+        (parameters
+          (parameter
+            name: (parameter_name
+              (identifier))
+            value: (string)))))))
+
+================================================================================
+Closing tag
+================================================================================
+
+{{ /collection }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (closing_tag
+      (identifier))))

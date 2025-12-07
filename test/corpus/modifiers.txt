@@ -1,0 +1,89 @@
+================================================================================
+Single modifier
+================================================================================
+
+{{ title | upper }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (modifier_chain
+        (identifier)
+        (modifier
+          (identifier))))))
+
+================================================================================
+Multiple modifiers
+================================================================================
+
+{{ title | upper | slugify }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (modifier_chain
+        (modifier_chain
+          (identifier)
+          (modifier
+            (identifier)))
+        (modifier
+          (identifier))))))
+
+================================================================================
+Modifier with colon argument
+================================================================================
+
+{{ title | ensure_right:rocks }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (modifier_chain
+        (identifier)
+        (modifier
+          (identifier)
+          (modifier_arguments
+            (identifier)))))))
+
+================================================================================
+Modifier with string argument
+================================================================================
+
+{{ title | limit:'50' }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (modifier_chain
+        (identifier)
+        (modifier
+          (identifier)
+          (modifier_arguments
+            (string)))))))
+
+================================================================================
+Modifier with parentheses
+================================================================================
+
+{{ title | format('Y-m-d') }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (modifier_chain
+        (identifier)
+        (modifier
+          (identifier)
+          (modifier_arguments
+            (argument_list
+              (string))))))))
