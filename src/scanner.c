@@ -4,9 +4,8 @@
  */
 
 #include "tree_sitter/parser.h"
-#include <string.h>
+#include "tree_sitter/alloc.h"
 #include <stdbool.h>
-#include <stdlib.h>
 
 enum TokenType {
   TEXT,
@@ -48,7 +47,7 @@ static bool is_eof(TSLexer *lexer) {
 }
 
 void *tree_sitter_antlers_external_scanner_create() {
-  Scanner *scanner = (Scanner *)malloc(sizeof(Scanner));
+  Scanner *scanner = (Scanner *)ts_malloc(sizeof(Scanner));
   scanner->in_antlers = false;
   scanner->in_comment = false;
   scanner->in_php = false;
@@ -59,7 +58,7 @@ void *tree_sitter_antlers_external_scanner_create() {
 
 void tree_sitter_antlers_external_scanner_destroy(void *payload) {
   Scanner *scanner = (Scanner *)payload;
-  free(scanner);
+  ts_free(scanner);
 }
 
 unsigned tree_sitter_antlers_external_scanner_serialize(void *payload, char *buffer) {
