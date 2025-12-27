@@ -50,12 +50,17 @@
 ; Keywords
 ; ============================================================================
 
+; Control flow keywords - match anonymous keyword nodes
+"if" @keyword
+"elseif" @keyword
+"unless" @keyword
+"switch" @keyword
+
+; else_clause is a named node representing the entire "else" keyword
+(else_clause) @keyword
+
+; Logical operator keywords
 [
-  "if"
-  "elseif"
-  "else"
-  "unless"
-  "switch"
   "and"
   "or"
   "xor"
@@ -94,6 +99,10 @@
 ; Tag names: {{ collection }}
 (tag_name
   (identifier) @function)
+
+; Forward slash in closing tags
+(closing_tag
+  "/" @punctuation.special)
 
 ; Closing tags for keywords: {{ /if }} {{ /unless }} {{ /switch }}
 ; These should be highlighted as keywords to match their opening tags
