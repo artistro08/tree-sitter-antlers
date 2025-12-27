@@ -145,7 +145,13 @@ module.exports = grammar({
       seq(field("name", $.parameter_name), "=", field("value", $.string)),
 
     // Parameter name - dynamic bindings use : prefix but we use token.immediate to avoid conflicts
-    parameter_name: ($) => token(seq(optional(":"), /[a-zA-Z_][a-zA-Z0-9_]*/)),
+    parameter_name: ($) =>
+      token(
+        seq(
+          optional(":"),
+          /[a-zA-Z_][a-zA-Z0-9_]*(?:\:[a-zA-Z_][a-zA-Z0-9_]*)*/,
+        ),
+      ),
 
     // Modifiers: {{ variable | modifier | modifier:param }}
     modifier_chain: ($) =>
