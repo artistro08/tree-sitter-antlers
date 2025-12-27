@@ -106,9 +106,10 @@
 
 ; Closing tags for keywords: {{ /if }} {{ /unless }} {{ /switch }}
 ; These should be highlighted as keywords to match their opening tags
-(closing_tag
-  (identifier) @keyword
-  (#match? @keyword "^(if|unless|switch)$"))
+((closing_tag
+  (identifier) @keyword)
+ (#match? @keyword "^(if|unless|switch)$")
+ (#set! "priority" 105))
 
 ; Closing tags for other constructs: {{ /collection:blog }}
 (closing_tag
