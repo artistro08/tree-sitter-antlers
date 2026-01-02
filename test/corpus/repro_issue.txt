@@ -1,0 +1,41 @@
+================================================================================
+Namespaced parameters regression
+================================================================================
+
+{{ responsive:image class="{{ 'img-fluid rounded-3' + shadow }}" fetchpriority="high" alt="{{ alt }}" glide:width="{{ max_width ? max_width : '700' }}" quality:webp="65" md:quality:webp="85" fetchpriority="high" placeholder="false" }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (tag
+        (tag_name
+          (identifier))
+        (tag_method
+          (identifier))
+        (parameters
+          (parameter
+            name: (parameter_name)
+            value: (string))
+          (parameter
+            name: (parameter_name)
+            value: (string))
+          (parameter
+            name: (parameter_name)
+            value: (string))
+          (parameter
+            name: (parameter_name)
+            value: (string))
+          (parameter
+            name: (parameter_name)
+            value: (string))
+          (parameter
+            name: (parameter_name)
+            value: (string))
+          (parameter
+            name: (parameter_name)
+            value: (string))
+          (parameter
+            name: (parameter_name)
+            value: (string)))))))

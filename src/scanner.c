@@ -425,11 +425,6 @@ bool tree_sitter_antlers_external_scanner_scan(
     while (!is_eof(lexer)) {
       // Check for @ (escaped Antlers)
       if (lexer->lookahead == '@') {
-        if (has_content) {
-          lexer->mark_end(lexer);
-          lexer->result_symbol = TEXT;
-          return true;
-        }
         // Skip the @ and continue as text including the Antlers
         advance(lexer);
         if (lexer->lookahead == '{') {
