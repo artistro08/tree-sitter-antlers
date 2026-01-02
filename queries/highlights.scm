@@ -116,9 +116,10 @@
   (identifier) @function)
 
 ; Closing tags with variable (colon/dot) access: {{ /push:scripts }}
-(closing_tag
-  (variable
-    (identifier) @function))
+; The variable node and its identifiers should be highlighted as function
+((closing_tag
+  (variable) @function)
+ (#set! "priority" 110))
 
 ; ============================================================================
 ; Properties and Parameters
