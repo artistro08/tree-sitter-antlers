@@ -13,22 +13,16 @@ Closing tags with colons
 (template
   (antlers_node
     (statement_list
-      (tag
-        (tag_name
-          (identifier))
-        (tag_method
-          (identifier)))))
-  (text)
-  (antlers_node
-    (closing_tag
-      (tag_name
-        (identifier))
-      (tag_method
+      (variable
+        (identifier)
         (identifier))))
   (text)
   (antlers_node
     (closing_tag
-      (tag_name
-        (identifier))
-      (tag_method
-        (identifier)))))
+      (identifier)
+      (identifier)))
+  (text)
+  (antlers_node
+    (closing_tag
+      (identifier)
+      (identifier))))
