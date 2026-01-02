@@ -1,0 +1,34 @@
+================================================================================
+Closing tags with colons
+================================================================================
+
+{{ push:scripts }}
+  <script src="app.js"></script>
+{{ /push:scripts }}
+
+{{ /collection:blog }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (tag
+        (tag_name
+          (identifier))
+        (tag_method
+          (identifier)))))
+  (text)
+  (antlers_node
+    (closing_tag
+      (tag_name
+        (identifier))
+      (tag_method
+        (identifier))))
+  (text)
+  (antlers_node
+    (closing_tag
+      (tag_name
+        (identifier))
+      (tag_method
+        (identifier)))))
