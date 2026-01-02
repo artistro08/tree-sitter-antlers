@@ -83,8 +83,9 @@ module.exports = grammar({
 
     _statement: ($) => choice($.assignment, $._expression),
 
-    // Closing tag {{ /tagname }}
-    closing_tag: ($) => seq("/", choice($.identifier, $.variable)),
+    // Closing tag {{ /tagname }} or {{ /tagname:method }}
+    // Variable must come first in choice to match longer patterns like push:scripts
+    closing_tag: ($) => seq("/", choice($.variable, $.identifier)),
 
     // Conditionals
     conditional: ($) => seq("if", field("condition", $._expression)),
