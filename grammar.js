@@ -84,8 +84,7 @@ module.exports = grammar({
     _statement: ($) => choice($.assignment, $._expression),
 
     // Closing tag {{ /tagname }}
-    closing_tag: ($) =>
-      seq("/", $.identifier, optional(seq(":", $.identifier))),
+    closing_tag: ($) => seq("/", choice($.identifier, $.variable)),
 
     // Conditionals
     conditional: ($) => seq("if", field("condition", $._expression)),
