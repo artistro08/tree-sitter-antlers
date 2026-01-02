@@ -115,6 +115,11 @@
 (closing_tag
   (identifier) @function)
 
+; Closing tags with variable (colon/dot) access: {{ /push:scripts }}
+(closing_tag
+  (variable
+    (identifier) @function))
+
 ; ============================================================================
 ; Properties and Parameters
 ; ============================================================================
