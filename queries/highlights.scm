@@ -148,9 +148,9 @@
 ; ============================================================================
 
 ; Parameter names and values - MUST come before general identifier rules
-; Parameter names: {{ tag param="value" }} or {{ tag w=100 }}
+; Parameter names: {{ tag param="value" }} or {{ tag w=100 }} or {{ tag glide:width=100 }}
 (parameter
-  name: (identifier) @property)
+  name: (parameter_name) @property)
 
 ; Parameter string values
 (parameter

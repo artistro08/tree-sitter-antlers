@@ -46,7 +46,10 @@ module.exports = grammar({
     $.noparse_content,
   ],
 
-  conflicts: ($) => [[$.variable, $.tag_path]],
+  conflicts: ($) => [
+    [$.variable, $.tag_path],
+    [$._expression, $.tag_name, $.tag_path],
+  ],
 
   word: ($) => $.identifier,
 
@@ -122,11 +125,11 @@ module.exports = grammar({
         $.array_access,
       ),
 
-    // Variable access: {{ variable:nested }} or {{ variable.nested }}
+    // Variable access: {{ variable.nested }} (prefer dot over colon to avoid ternary conflicts)
     variable: ($) =>
       prec.left(
         PREC.MEMBER,
-        seq($.identifier, repeat1(seq(choice(":", "."), $.identifier))),
+        seq($.identifier, repeat1(seq(".", $.identifier))),
       ),
 
     // Tag: {{ tag:method param="value" }} or {{ tag:path:to:method param="value" }}
@@ -154,10 +157,14 @@ module.exports = grammar({
 
     parameter: ($) =>
       seq(
-        field("name", $.identifier),
+        field("name", $.parameter_name),
         "=",
         field("value", choice($.string, $.number, $.boolean, $.identifier)),
       ),
+
+    // Parameter name can include colons for namespaced parameters (e.g., glide:width, md:quality:webp)
+    parameter_name: ($) =>
+      token(seq(/[a-zA-Z_][a-zA-Z0-9_]*/, repeat(seq(":", /[a-zA-Z_][a-zA-Z0-9_]*/)))),
 
     // Modifiers: {{ variable | modifier | modifier:param }}
     modifier_chain: ($) =>
@@ -380,8 +387,14 @@ module.exports = grammar({
 
     escape_sequence: ($) => token.immediate(seq("\\", /./)),
 
+    // String interpolation supports both {variable} and {{ expression }} syntax
     string_interpolation: ($) =>
-      seq("{", choice($.variable, $.identifier), "}"),
+      choice(
+        // Single brace: {variable}
+        seq("{", choice($.variable, $.identifier), "}"),
+        // Double brace: {{ expression }}
+        seq("{{", $._expression, "}}"),
+      ),
 
     boolean: ($) => choice("true", "false"),
 

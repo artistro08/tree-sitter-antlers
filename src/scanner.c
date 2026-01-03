@@ -410,7 +410,9 @@ bool tree_sitter_antlers_external_scanner_scan(
       }
 
       // Regular Antlers start {{
-      if (valid_symbols[ANTLERS_START]) {
+      // Don't emit ANTLERS_START if we're already inside an Antlers tag
+      // This allows {{ }} to be used in string interpolation
+      if (valid_symbols[ANTLERS_START] && !scanner->in_antlers) {
         lexer->result_symbol = ANTLERS_START;
         scanner->in_antlers = true;
         return true;
