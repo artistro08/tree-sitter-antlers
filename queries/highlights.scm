@@ -108,6 +108,18 @@
 ; Array access: {{ items[0] }}
 (array_access) @variable
 
+; Identifiers in binary expressions (comparisons, arithmetic, etc.)
+(binary_expression
+  (identifier) @variable)
+
+; Identifiers in unary expressions
+(unary_expression
+  (identifier) @variable)
+
+; Identifiers in ternary expressions
+(ternary_expression
+  (identifier) @variable)
+
 ; Direct identifier expressions in statements (variables)
 (statement_list
   (identifier) @variable)
