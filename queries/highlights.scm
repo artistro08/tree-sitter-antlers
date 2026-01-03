@@ -141,11 +141,11 @@
   "/" @punctuation.special)
 
 ; Closing tags with variable (colon/dot) access: {{ /push:scripts }}
-; The variable node and its identifiers should be highlighted as function
+; The variable node should be highlighted as variable to match opening tags
 (closing_tag
-  (variable) @function)
+  (variable) @variable)
 
-; Closing tags for other constructs: {{ /collection:blog }}
+; Closing tags for other constructs: {{ /collection }}
 ; This must come before the keyword pattern so keywords can override it
 (closing_tag
   (identifier) @function)
