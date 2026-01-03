@@ -137,16 +137,18 @@
   (identifier) @function.method)
 
 ; Tag methods: {{ collection:blog }}
+; Highlight as variable to match variable syntax
 (tag_method
-  (identifier) @function.method)
+  (identifier) @variable)
 
 ; Tag names: {{ collection }}
 (tag_name
   (identifier) @function)
 
 ; Tag paths: {{ glide:site_settings:image }}
+; Highlight as variable to match variable syntax like user:name:field
 (tag_path
-  (identifier) @function)
+  (identifier) @variable)
 
 ; Forward slash in closing tags
 (closing_tag
