@@ -120,6 +120,10 @@
 (ternary_expression
   (identifier) @variable)
 
+; Identifiers at the start of modifier chains: {{ variable | modifier }}
+(modifier_chain
+  (identifier) @variable)
+
 ; Identifiers in conditional conditions: {{ if card_styling }}
 (conditional
   condition: (identifier) @variable)
