@@ -223,7 +223,13 @@
 (assignment
   left: [(identifier) (variable)] @variable)
 
-; Assignment right side is already highlighted by other rules
+; Assignment right side identifiers: {{ icon_group = fontawesome_icon_solid }}
+(assignment
+  right: (identifier) @variable)
+
+; Assignment right side variables: {{ icon_group = site:config }}
+(assignment
+  right: (variable) @variable)
 
 ; ============================================================================
 ; Operators
