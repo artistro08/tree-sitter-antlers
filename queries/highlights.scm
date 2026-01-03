@@ -99,6 +99,14 @@
 ] @keyword
 
 ; ============================================================================
+; Variables and Identifiers (General - comes first as fallback)
+; ============================================================================
+
+; Simple identifiers (fallback for other identifiers)
+; This must come before more specific rules so they can override it
+(identifier) @variable
+
+; ============================================================================
 ; Functions and Methods
 ; ============================================================================
 
@@ -126,23 +134,20 @@
 (closing_tag
   "/" @punctuation.special)
 
+; Closing tags with variable (colon/dot) access: {{ /push:scripts }}
+; The variable node and its identifiers should be highlighted as function
+(closing_tag
+  (variable) @function)
+
 ; Closing tags for keywords: {{ /if }} {{ /unless }} {{ /switch }}
 ; These should be highlighted as keywords to match their opening tags
 ((closing_tag
   (identifier) @keyword)
- (#match? @keyword "^(if|unless|switch)$")
- (#set! "priority" 105))
+ (#match? @keyword "^(if|unless|switch)$"))
 
 ; Closing tags for other constructs: {{ /collection:blog }}
-((closing_tag
+(closing_tag
   (identifier) @function)
- (#set! "priority" 100))
-
-; Closing tags with variable (colon/dot) access: {{ /push:scripts }}
-; The variable node and its identifiers should be highlighted as function
-((closing_tag
-  (variable) @function)
- (#set! "priority" 110))
 
 ; ============================================================================
 ; Properties and Parameters
@@ -192,11 +197,6 @@
 
 ; Variable with nested access: {{ user:name }} or {{ user.name }}
 (variable) @variable
-
-; Simple identifiers (fallback for other identifiers)
-; Lower priority so it doesn't override more specific rules
-((identifier) @variable
- (#set! "priority" 50))
 
 ; ============================================================================
 ; Operators
