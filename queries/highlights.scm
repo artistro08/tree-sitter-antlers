@@ -134,8 +134,9 @@
  (#set! "priority" 105))
 
 ; Closing tags for other constructs: {{ /collection:blog }}
-(closing_tag
+((closing_tag
   (identifier) @function)
+ (#set! "priority" 100))
 
 ; Closing tags with variable (colon/dot) access: {{ /push:scripts }}
 ; The variable node and its identifiers should be highlighted as function
@@ -193,7 +194,9 @@
 (variable) @variable
 
 ; Simple identifiers (fallback for other identifiers)
-(identifier) @variable
+; Lower priority so it doesn't override more specific rules
+((identifier) @variable
+ (#set! "priority" 50))
 
 ; ============================================================================
 ; Operators
