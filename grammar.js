@@ -173,9 +173,10 @@ module.exports = grammar({
         field("value", choice($.string, $.number, $.boolean, $.identifier)),
       ),
 
-    // Parameter name can include colons for namespaced parameters (e.g., glide:width, md:quality:webp)
+    // Parameter name can include colons for namespaced parameters and hyphens for HTML attributes
+    // (e.g., glide:width, md:quality:webp, wrapper-class, data-value)
     parameter_name: ($) =>
-      token(seq(/[a-zA-Z_][a-zA-Z0-9_]*/, repeat(seq(":", /[a-zA-Z_][a-zA-Z0-9_]*/)))),
+      token(seq(/[a-zA-Z_][a-zA-Z0-9_-]*/, repeat(seq(":", /[a-zA-Z_][a-zA-Z0-9_-]*/)))),
 
     // Modifiers: {{ variable | modifier | modifier:param }}
     modifier_chain: ($) =>

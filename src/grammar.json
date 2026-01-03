@@ -518,7 +518,7 @@
         "members": [
           {
             "type": "PATTERN",
-            "value": "[a-zA-Z_][a-zA-Z0-9_]*"
+            "value": "[a-zA-Z_][a-zA-Z0-9_-]*"
           },
           {
             "type": "REPEAT",
@@ -531,7 +531,7 @@
                 },
                 {
                   "type": "PATTERN",
-                  "value": "[a-zA-Z_][a-zA-Z0-9_]*"
+                  "value": "[a-zA-Z_][a-zA-Z0-9_-]*"
                 }
               ]
             }
