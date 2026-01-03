@@ -98,6 +98,19 @@
   "desc"
 ] @keyword
 
+; ============================================================================
+; Variables and Identifiers (General - comes first as base layer)
+; ============================================================================
+
+; Variable with nested access: {{ user:name }} or {{ user.name }}
+(variable) @variable
+
+; Array access: {{ items[0] }}
+(array_access) @variable
+
+; Direct identifier expressions in statements (variables)
+(statement_list
+  (identifier) @variable)
 
 ; ============================================================================
 ; Functions and Methods
@@ -182,21 +195,6 @@
   left: [(identifier) (variable)] @variable)
 
 ; Assignment right side is already highlighted by other rules
-
-; ============================================================================
-; Variables
-; ============================================================================
-
-; Array access: {{ items[0] }}
-(array_access) @variable
-
-; Variable with nested access: {{ user:name }} or {{ user.name }}
-(variable) @variable
-
-; Simple standalone identifiers (catch-all fallback)
-; Exclude identifiers that are keywords in closing tags
-(statement_list
-  (identifier) @variable)
 
 ; ============================================================================
 ; Operators
