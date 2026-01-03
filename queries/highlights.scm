@@ -170,6 +170,11 @@
 (tag_path
   (identifier) @variable)
 
+; Inline tag curly braces: {collection:posts}
+(inline_tag
+  "{" @punctuation.bracket
+  "}" @punctuation.bracket)
+
 ; Forward slash in closing tags
 (closing_tag
   "/" @punctuation.special)

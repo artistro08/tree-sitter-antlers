@@ -79,6 +79,10 @@
           "named": true
         },
         {
+          "type": "inline_tag",
+          "named": true
+        },
+        {
           "type": "method_call",
           "named": true
         },
@@ -166,6 +170,10 @@
           "named": true
         },
         {
+          "type": "inline_tag",
+          "named": true
+        },
+        {
           "type": "method_call",
           "named": true
         },
@@ -249,6 +257,10 @@
             "named": true
           },
           {
+            "type": "inline_tag",
+            "named": true
+          },
+          {
             "type": "method_call",
             "named": true
           },
@@ -324,6 +336,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inline_tag",
             "named": true
           },
           {
@@ -411,6 +427,10 @@
             "named": true
           },
           {
+            "type": "inline_tag",
+            "named": true
+          },
+          {
             "type": "method_call",
             "named": true
           },
@@ -486,6 +506,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inline_tag",
             "named": true
           },
           {
@@ -617,6 +641,10 @@
             "named": true
           },
           {
+            "type": "inline_tag",
+            "named": true
+          },
+          {
             "type": "method_call",
             "named": true
           },
@@ -702,6 +730,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "inline_tag",
           "named": true
         },
         {
@@ -855,6 +887,10 @@
             "named": true
           },
           {
+            "type": "inline_tag",
+            "named": true
+          },
+          {
             "type": "method_call",
             "named": true
           },
@@ -936,6 +972,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inline_tag",
             "named": true
           },
           {
@@ -1023,6 +1063,10 @@
           "named": true
         },
         {
+          "type": "inline_tag",
+          "named": true
+        },
+        {
           "type": "method_call",
           "named": true
         },
@@ -1093,6 +1137,33 @@
     }
   },
   {
+    "type": "inline_tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "parameters",
+          "named": true
+        },
+        {
+          "type": "tag_method",
+          "named": true
+        },
+        {
+          "type": "tag_name",
+          "named": true
+        },
+        {
+          "type": "tag_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "method_call",
     "named": true,
     "fields": {
@@ -1132,6 +1203,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inline_tag",
             "named": true
           },
           {
@@ -1279,6 +1354,10 @@
           "named": true
         },
         {
+          "type": "inline_tag",
+          "named": true
+        },
+        {
           "type": "method_call",
           "named": true
         },
@@ -1386,6 +1465,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "inline_tag",
           "named": true
         },
         {
@@ -1549,6 +1632,10 @@
           "named": true
         },
         {
+          "type": "inline_tag",
+          "named": true
+        },
+        {
           "type": "method_call",
           "named": true
         },
@@ -1693,6 +1780,10 @@
             "named": true
           },
           {
+            "type": "inline_tag",
+            "named": true
+          },
+          {
             "type": "method_call",
             "named": true
           },
@@ -1806,6 +1897,10 @@
           "named": true
         },
         {
+          "type": "inline_tag",
+          "named": true
+        },
+        {
           "type": "method_call",
           "named": true
         },
@@ -1912,6 +2007,10 @@
           "named": true
         },
         {
+          "type": "inline_tag",
+          "named": true
+        },
+        {
           "type": "method_call",
           "named": true
         },
@@ -1992,6 +2091,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inline_tag",
             "named": true
           },
           {
@@ -2202,6 +2305,10 @@
             "named": true
           },
           {
+            "type": "inline_tag",
+            "named": true
+          },
+          {
             "type": "method_call",
             "named": true
           },
@@ -2280,6 +2387,10 @@
             "named": true
           },
           {
+            "type": "inline_tag",
+            "named": true
+          },
+          {
             "type": "method_call",
             "named": true
           },
@@ -2355,6 +2466,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inline_tag",
             "named": true
           },
           {
@@ -2442,6 +2557,10 @@
           "named": true
         },
         {
+          "type": "inline_tag",
+          "named": true
+        },
+        {
           "type": "method_call",
           "named": true
         },
@@ -2522,6 +2641,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inline_tag",
             "named": true
           },
           {
@@ -2621,6 +2744,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "inline_tag",
           "named": true
         },
         {

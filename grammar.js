@@ -46,7 +46,10 @@ module.exports = grammar({
     $.noparse_content,
   ],
 
-  conflicts: ($) => [[$.variable, $.tag_path]],
+  conflicts: ($) => [
+    [$.variable, $.tag_path],
+    [$.tag_name, $.tag_path],
+  ],
 
   word: ($) => $.identifier,
 
@@ -120,6 +123,7 @@ module.exports = grammar({
         $.property_access,
         $.array_access,
         $.tag,
+        $.inline_tag,
       ),
 
     // Variable access: {{ variable:nested }} or {{ variable.nested }}
@@ -162,6 +166,19 @@ module.exports = grammar({
     // Use token.immediate for colon to require no whitespace
     tag_path: ($) =>
       prec.left(seq($.identifier, repeat1(seq(token.immediate(":"), $.identifier)))),
+
+    // Inline tag with single curly braces: {tag:method param="value"}
+    // Used in assignments like {{ result = {collection:posts limit="5"} }}
+    inline_tag: ($) =>
+      seq(
+        "{",
+        choice(
+          prec(2, $.tag_path),
+          seq($.tag_name, optional(seq(token.immediate(":"), $.tag_method))),
+        ),
+        optional($.parameters),
+        "}",
+      ),
 
     // Parameters for tags (at least one parameter required to distinguish from variable)
     parameters: ($) => prec.left(repeat1($.parameter)),
