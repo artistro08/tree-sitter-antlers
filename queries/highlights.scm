@@ -108,6 +108,10 @@
 ; Array access: {{ items[0] }}
 (array_access) @variable
 
+; Standalone identifiers in statements: {{ columns }}
+(statement_list
+  (identifier) @variable)
+
 ; Identifiers in binary expressions (comparisons, arithmetic, etc.)
 (binary_expression
   (identifier) @variable)
