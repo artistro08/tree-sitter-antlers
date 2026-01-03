@@ -2068,10 +2068,6 @@
   ],
   "conflicts": [
     [
-      "variable",
-      "tag_path"
-    ],
-    [
       "_expression",
       "tag_name",
       "tag_path"

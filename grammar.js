@@ -46,10 +46,7 @@ module.exports = grammar({
     $.noparse_content,
   ],
 
-  conflicts: ($) => [
-    [$.variable, $.tag_path],
-    [$._expression, $.tag_name, $.tag_path],
-  ],
+  conflicts: ($) => [[$._expression, $.tag_name, $.tag_path]],
 
   word: ($) => $.identifier,
 
