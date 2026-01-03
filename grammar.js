@@ -313,8 +313,8 @@ module.exports = grammar({
     gatekeeper: ($) =>
       prec.right(PREC.GATEKEEPER, seq($._expression, "?=", $._expression)),
 
-    // Parenthesized expression
-    parenthesized_expression: ($) => seq("(", $._expression, ")"),
+    // Parenthesized expression - can contain assignments or expressions
+    parenthesized_expression: ($) => seq("(", $._statement, ")"),
 
     // Array literal
     array: ($) =>

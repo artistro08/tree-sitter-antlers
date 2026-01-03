@@ -173,6 +173,16 @@
   property: (identifier) @property)
 
 ; ============================================================================
+; Assignments
+; ============================================================================
+
+; Assignment left side: {{ total = 0 }}
+(assignment
+  left: [(identifier) (variable)] @variable)
+
+; Assignment right side is already highlighted by other rules
+
+; ============================================================================
 ; Variables
 ; ============================================================================
 

@@ -1633,7 +1633,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_expression"
+          "name": "_statement"
         },
         {
           "type": "STRING",
