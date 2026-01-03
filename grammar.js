@@ -46,7 +46,7 @@ module.exports = grammar({
     $.noparse_content,
   ],
 
-  conflicts: ($) => [],
+  conflicts: ($) => [[$.variable, $.tag_path]],
 
   word: ($) => $.identifier,
 
@@ -129,29 +129,34 @@ module.exports = grammar({
         seq($.identifier, repeat1(seq(choice(":", "."), $.identifier))),
       ),
 
-    // Tag: {{ tag:method param="value" }}
+    // Tag: {{ tag:method param="value" }} or {{ tag:path:to:method param="value" }}
     tag: ($) =>
       prec.left(
-        seq($.tag_name, optional(seq(":", $.tag_method)), $.parameters),
+        seq(
+          choice(
+            prec(2, $.tag_path),
+            seq($.tag_name, optional(seq(":", $.tag_method))),
+          ),
+          $.parameters,
+        ),
       ),
 
     tag_name: ($) => $.identifier,
 
     tag_method: ($) => $.identifier,
 
+    // Tag path for multi-part tags like glide:site_settings:founders_image
+    tag_path: ($) =>
+      prec.left(seq($.identifier, repeat1(seq(":", $.identifier)))),
+
     // Parameters for tags (at least one parameter required to distinguish from variable)
     parameters: ($) => prec.left(repeat1($.parameter)),
 
     parameter: ($) =>
-      seq(field("name", $.parameter_name), "=", field("value", $.string)),
-
-    // Parameter name - dynamic bindings use : prefix but we use token.immediate to avoid conflicts
-    parameter_name: ($) =>
-      token(
-        seq(
-          optional(":"),
-          /[a-zA-Z_][a-zA-Z0-9_]*(?:\:[a-zA-Z_][a-zA-Z0-9_]*)*/,
-        ),
+      seq(
+        field("name", $.identifier),
+        "=",
+        field("value", choice($.string, $.number, $.boolean, $.identifier)),
       ),
 
     // Modifiers: {{ variable | modifier | modifier:param }}
@@ -369,6 +374,14 @@ module.exports = grammar({
           '"',
         ),
       ),
+
+    // String components
+    string_content: ($) => /[^"\\{]+/,
+
+    escape_sequence: ($) => token.immediate(seq("\\", /./)),
+
+    string_interpolation: ($) =>
+      seq("{", choice($.variable, $.identifier), "}"),
 
     boolean: ($) => choice("true", "false"),
 

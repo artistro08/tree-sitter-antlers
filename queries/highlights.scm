@@ -118,6 +118,10 @@
 (tag_name
   (identifier) @function)
 
+; Tag paths: {{ glide:site_settings:image }}
+(tag_path
+  (identifier) @function)
+
 ; Forward slash in closing tags
 (closing_tag
   "/" @punctuation.special)
@@ -147,9 +151,22 @@
 (property_access
   property: (identifier) @property)
 
-; Parameter names: {{ tag param="value" }}
-; Note: parameter_name is a terminal token, not a parent node
-(parameter_name) @property
+; Parameter names: {{ tag param="value" }} or {{ tag w=100 }}
+(parameter
+  name: (identifier) @property)
+
+; Parameter values (string, number, boolean)
+(parameter
+  value: (string) @string)
+
+(parameter
+  value: (number) @number)
+
+(parameter
+  value: (boolean) @constant.builtin)
+
+(parameter
+  value: (identifier) @variable)
 
 ; ============================================================================
 ; Variables
