@@ -3,8 +3,7 @@
 ; Inject HTML into text nodes with combined injection to preserve Antlers syntax
 ((text) @injection.content
  (#set! injection.language "html")
- (#set! injection.combined)
- (#set! injection.include-children))
+ (#set! injection.combined))
 
 ; Inject PHP into PHP blocks
 ((php_content) @injection.content

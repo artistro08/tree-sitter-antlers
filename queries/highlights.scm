@@ -224,9 +224,13 @@
 (assignment
   left: [(identifier) (variable)] @variable)
 
-; Assignment right side: {{ icon_group = fontawesome_icon_solid }}
+; Assignment right side identifiers: {{ icon_group = fontawesome_icon_solid }}
 (assignment
-  right: [(identifier) (variable)] @variable)
+  right: (identifier) @variable)
+
+; Assignment right side variables: {{ icon_group = site:config }}
+(assignment
+  right: (variable) @variable)
 
 ; ============================================================================
 ; Operators
