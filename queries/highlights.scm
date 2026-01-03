@@ -120,6 +120,16 @@
 (ternary_expression
   (identifier) @variable)
 
+; Identifiers in conditional conditions: {{ if card_styling }}
+(conditional
+  condition: (identifier) @variable)
+
+(elseif_clause
+  condition: (identifier) @variable)
+
+(unless
+  condition: (identifier) @variable)
+
 ; Direct identifier expressions in statements (variables)
 (statement_list
   (identifier) @variable)
