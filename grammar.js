@@ -370,17 +370,6 @@ module.exports = grammar({
         ),
       ),
 
-    // String content - anything except quotes, backslash, or opening brace
-    string_content: ($) => token.immediate(/[^"\\{]+/),
-
-    // Escape sequences in strings
-    escape_sequence: ($) => token.immediate(seq("\\", /./)),
-
-    // Interpolation: {variable} or {variable:nested}
-    // Uses single braces, not double braces like Antlers tags
-    string_interpolation: ($) =>
-      seq(token.immediate("{"), choice($.variable, $.identifier), "}"),
-
     boolean: ($) => choice("true", "false"),
 
     null: ($) => "null",
