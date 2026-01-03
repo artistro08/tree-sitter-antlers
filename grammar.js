@@ -46,10 +46,7 @@ module.exports = grammar({
     $.noparse_content,
   ],
 
-  conflicts: ($) => [
-    [$.variable, $.tag_path],
-    [$._expression, $._ternary_expression],
-  ],
+  conflicts: ($) => [[$.variable, $.tag_path]],
 
   word: ($) => $.identifier,
 
@@ -126,23 +123,29 @@ module.exports = grammar({
       ),
 
     // Variable access: {{ variable:nested }} or {{ variable.nested }}
-    // Use lower precedence to prefer ternary when ambiguous
+    // Use token.immediate for colon to require no whitespace (helps distinguish from ternary)
     variable: ($) =>
-      prec.dynamic(
-        -10,
-        prec.left(
-          1,
-          seq($.identifier, repeat1(seq(choice(":", "."), $.identifier))),
+      prec.left(
+        PREC.MEMBER,
+        seq(
+          $.identifier,
+          repeat1(
+            seq(
+              choice(token.immediate(":"), "."),
+              $.identifier,
+            ),
+          ),
         ),
       ),
 
     // Tag: {{ tag:method param="value" }} or {{ tag:path:to:method param="value" }}
+    // Use token.immediate for colon to require no whitespace
     tag: ($) =>
       prec.left(
         seq(
           choice(
             prec(2, $.tag_path),
-            seq($.tag_name, optional(seq(":", $.tag_method))),
+            seq($.tag_name, optional(seq(token.immediate(":"), $.tag_method))),
           ),
           $.parameters,
         ),
@@ -153,8 +156,9 @@ module.exports = grammar({
     tag_method: ($) => $.identifier,
 
     // Tag path for multi-part tags like glide:site_settings:founders_image
+    // Use token.immediate for colon to require no whitespace
     tag_path: ($) =>
-      prec.left(seq($.identifier, repeat1(seq(":", $.identifier)))),
+      prec.left(seq($.identifier, repeat1(seq(token.immediate(":"), $.identifier)))),
 
     // Parameters for tags (at least one parameter required to distinguish from variable)
     parameters: ($) => prec.left(repeat1($.parameter)),
@@ -203,12 +207,13 @@ module.exports = grammar({
       ),
 
     // Property access: {{ variable.property }} or {{ variable:property }}
+    // Use token.immediate for colon to require no whitespace
     property_access: ($) =>
       prec.left(
         PREC.MEMBER,
         seq(
           field("object", $._expression),
-          choice(".", ":"),
+          choice(".", token.immediate(":")),
           field("property", $.identifier),
         ),
       ),
@@ -301,42 +306,17 @@ module.exports = grammar({
       prec.right(PREC.UNARY, seq(choice("!", "-", "not"), $._expression)),
 
     // Ternary expression: {{ condition ? 'yes' : 'no' }}
-    // Use higher precedence to win over variable and restricted expression for consequence/alternative
+    // Colon with whitespace is treated as ternary, without whitespace as variable access
     ternary_expression: ($) =>
-      prec.dynamic(
-        1,
-        prec.right(
-          PREC.MEMBER + 1,
-          seq(
-            field("condition", $._expression),
-            "?",
-            field("consequence", $._ternary_expression),
-            ":",
-            field("alternative", $._ternary_expression),
-          ),
+      prec.right(
+        PREC.TERNARY,
+        seq(
+          field("condition", $._expression),
+          "?",
+          field("consequence", $._expression),
+          ":",
+          field("alternative", $._expression),
         ),
-      ),
-
-    // Expression type for ternary consequence/alternative that excludes colon-based variable access
-    // Note: Use parentheses if you need variables with colon notation in ternaries
-    _ternary_expression: ($) =>
-      choice(
-        $.identifier,
-        $.number,
-        $.string,
-        $.boolean,
-        $.null,
-        $.array,
-        $.binary_expression,
-        $.unary_expression,
-        $.null_coalescence,
-        $.gatekeeper,
-        $.parenthesized_expression,
-        $.modifier_chain,
-        $.method_call,
-        $.property_access,
-        $.array_access,
-        $.tag,
       ),
 
     // Null coalescence: {{ value ?? default }}
