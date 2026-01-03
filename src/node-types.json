@@ -2238,15 +2238,7 @@
             "named": true
           },
           {
-            "type": "ternary_expression",
-            "named": true
-          },
-          {
             "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "variable",
             "named": true
           }
         ]
@@ -2394,15 +2386,7 @@
             "named": true
           },
           {
-            "type": "ternary_expression",
-            "named": true
-          },
-          {
             "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "variable",
             "named": true
           }
         ]

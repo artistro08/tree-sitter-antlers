@@ -316,10 +316,10 @@
     },
     "variable": {
       "type": "PREC_DYNAMIC",
-      "value": -1,
+      "value": -10,
       "content": {
         "type": "PREC_LEFT",
-        "value": 12,
+        "value": 1,
         "content": {
           "type": "SEQ",
           "members": [
@@ -1575,7 +1575,7 @@
     },
     "ternary_expression": {
       "type": "PREC_DYNAMIC",
-      "value": 10,
+      "value": 1,
       "content": {
         "type": "PREC_RIGHT",
         "value": 13,
@@ -1599,7 +1599,7 @@
               "name": "consequence",
               "content": {
                 "type": "SYMBOL",
-                "name": "_expression"
+                "name": "_ternary_expression"
               }
             },
             {
@@ -1611,12 +1611,81 @@
               "name": "alternative",
               "content": {
                 "type": "SYMBOL",
-                "name": "_expression"
+                "name": "_ternary_expression"
               }
             }
           ]
         }
       }
+    },
+    "_ternary_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "boolean"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "null"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "array"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "binary_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unary_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "null_coalescence"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gatekeeper"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "parenthesized_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "modifier_chain"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "method_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "property_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "array_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tag"
+        }
+      ]
     },
     "null_coalescence": {
       "type": "PREC_RIGHT",
@@ -2089,8 +2158,8 @@
       "tag_path"
     ],
     [
-      "ternary_expression",
-      "variable"
+      "_expression",
+      "_ternary_expression"
     ]
   ],
   "precedences": [],

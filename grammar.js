@@ -48,7 +48,7 @@ module.exports = grammar({
 
   conflicts: ($) => [
     [$.variable, $.tag_path],
-    [$.ternary_expression, $.variable],
+    [$._expression, $._ternary_expression],
   ],
 
   word: ($) => $.identifier,
@@ -126,12 +126,12 @@ module.exports = grammar({
       ),
 
     // Variable access: {{ variable:nested }} or {{ variable.nested }}
-    // Use negative dynamic precedence to prefer ternary when ambiguous
+    // Use lower precedence to prefer ternary when ambiguous
     variable: ($) =>
       prec.dynamic(
-        -1,
+        -10,
         prec.left(
-          PREC.MEMBER,
+          1,
           seq($.identifier, repeat1(seq(choice(":", "."), $.identifier))),
         ),
       ),
@@ -301,20 +301,42 @@ module.exports = grammar({
       prec.right(PREC.UNARY, seq(choice("!", "-", "not"), $._expression)),
 
     // Ternary expression: {{ condition ? 'yes' : 'no' }}
-    // Higher precedence and dynamic precedence to win over variable
+    // Use higher precedence to win over variable and restricted expression for consequence/alternative
     ternary_expression: ($) =>
       prec.dynamic(
-        10,
+        1,
         prec.right(
           PREC.MEMBER + 1,
           seq(
             field("condition", $._expression),
             "?",
-            field("consequence", $._expression),
+            field("consequence", $._ternary_expression),
             ":",
-            field("alternative", $._expression),
+            field("alternative", $._ternary_expression),
           ),
         ),
+      ),
+
+    // Expression type for ternary consequence/alternative that excludes colon-based variable access
+    // Note: Use parentheses if you need variables with colon notation in ternaries
+    _ternary_expression: ($) =>
+      choice(
+        $.identifier,
+        $.number,
+        $.string,
+        $.boolean,
+        $.null,
+        $.array,
+        $.binary_expression,
+        $.unary_expression,
+        $.null_coalescence,
+        $.gatekeeper,
+        $.parenthesized_expression,
+        $.modifier_chain,
+        $.method_call,
+        $.property_access,
+        $.array_access,
+        $.tag,
       ),
 
     // Null coalescence: {{ value ?? default }}
