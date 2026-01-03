@@ -147,33 +147,30 @@
 ; Properties and Parameters
 ; ============================================================================
 
+; Parameter names and values - MUST come before general identifier rules
+; Parameter names: {{ tag param="value" }} or {{ tag w=100 }}
+(parameter
+  name: (identifier) @property)
+
+; Parameter string values
+(parameter
+  value: (string) @string)
+
+; Parameter number values
+(parameter
+  value: (number) @number)
+
+; Parameter boolean values
+(parameter
+  value: (boolean) @constant.builtin)
+
+; Parameter identifier values
+(parameter
+  value: (identifier) @variable)
+
 ; Property access: {{ variable.property }} or {{ variable:property }}
 (property_access
   property: (identifier) @property)
-
-; Parameter names: {{ tag param="value" }} or {{ tag w=100 }}
-((parameter
-  name: (identifier) @property)
- (#set! "priority" 110))
-
-; Parameter values (string, number, boolean, identifier)
-; Note: values are already highlighted by general rules above,
-; but we set priority to ensure consistency
-((parameter
-  value: (string) @string)
- (#set! "priority" 110))
-
-((parameter
-  value: (number) @number)
- (#set! "priority" 110))
-
-((parameter
-  value: (boolean) @constant.builtin)
- (#set! "priority" 110))
-
-((parameter
-  value: (identifier) @variable)
- (#set! "priority" 110))
 
 ; ============================================================================
 ; Variables
