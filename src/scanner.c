@@ -351,6 +351,10 @@ bool tree_sitter_antlers_external_scanner_scan(
     if (lexer->lookahead == '{') {
       advance(lexer);
 
+      // Mark the end of the {{ token here, before checking for special syntax
+      // This ensures ANTLERS_START doesn't include characters from failed keyword matches
+      lexer->mark_end(lexer);
+
       // Check for comment start {{#
       if (valid_symbols[COMMENT_START] && lexer->lookahead == '#') {
         advance(lexer);

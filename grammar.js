@@ -104,7 +104,6 @@ module.exports = grammar({
       choice(
         $.identifier,
         $.variable,
-        $.tag,
         $.number,
         $.string,
         $.boolean,
@@ -120,6 +119,7 @@ module.exports = grammar({
         $.method_call,
         $.property_access,
         $.array_access,
+        $.tag,
       ),
 
     // Variable access: {{ variable:nested }} or {{ variable.nested }}
@@ -141,13 +141,16 @@ module.exports = grammar({
     // Tag: {{ tag:method param="value" }} or {{ tag:path:to:method param="value" }}
     // Use token.immediate for colon to require no whitespace
     tag: ($) =>
-      prec.left(
-        seq(
-          choice(
-            prec(2, $.tag_path),
-            seq($.tag_name, optional(seq(token.immediate(":"), $.tag_method))),
+      prec.dynamic(
+        -10,
+        prec.left(
+          seq(
+            choice(
+              prec(2, $.tag_path),
+              seq($.tag_name, optional(seq(token.immediate(":"), $.tag_method))),
+            ),
+            $.parameters,
           ),
-          $.parameters,
         ),
       ),
 
@@ -302,8 +305,15 @@ module.exports = grammar({
     pluck_clause: ($) => seq("pluck", "(", $.string, ")"),
 
     // Unary expressions
+    // Use token("not") to make it a keyword that won't be treated as identifier
     unary_expression: ($) =>
-      prec.right(PREC.UNARY, seq(choice("!", "-", "not"), $._expression)),
+      prec.dynamic(
+        10,
+        prec.right(
+          PREC.UNARY,
+          seq(choice("!", "-", token("not")), $._expression),
+        ),
+      ),
 
     // Ternary expression: {{ condition ? 'yes' : 'no' }}
     // Colon with whitespace is treated as ternary, without whitespace as variable access
