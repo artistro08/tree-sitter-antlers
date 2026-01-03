@@ -425,11 +425,11 @@ module.exports = grammar({
 
     escape_sequence: ($) => token.immediate(seq("\\", /./)),
 
-    // String interpolation supports both {variable} and {{ expression }} syntax
+    // String interpolation supports both {expression} and {{ expression }} syntax
     string_interpolation: ($) =>
       choice(
-        // Single brace: {variable}
-        seq("{", choice($.variable, $.identifier), "}"),
+        // Single brace: {expression}
+        seq("{", $._expression, "}"),
         // Double brace: {{ expression }}
         seq("{{", $._expression, "}}"),
       ),
