@@ -98,13 +98,6 @@
   "desc"
 ] @keyword
 
-; ============================================================================
-; Variables and Identifiers (General - comes first as fallback)
-; ============================================================================
-
-; Simple identifiers (fallback for other identifiers)
-; This must come before more specific rules so they can override it
-(identifier) @variable
 
 ; ============================================================================
 ; Functions and Methods
@@ -139,15 +132,17 @@
 (closing_tag
   (variable) @function)
 
+; Closing tags for other constructs: {{ /collection:blog }}
+; This must come before the keyword pattern so keywords can override it
+(closing_tag
+  (identifier) @function)
+
 ; Closing tags for keywords: {{ /if }} {{ /unless }} {{ /switch }}
 ; These should be highlighted as keywords to match their opening tags
+; This comes last so it overrides the general function rule above
 ((closing_tag
   (identifier) @keyword)
  (#match? @keyword "^(if|unless|switch)$"))
-
-; Closing tags for other constructs: {{ /collection:blog }}
-(closing_tag
-  (identifier) @function)
 
 ; ============================================================================
 ; Properties and Parameters
@@ -197,6 +192,11 @@
 
 ; Variable with nested access: {{ user:name }} or {{ user.name }}
 (variable) @variable
+
+; Simple standalone identifiers (catch-all fallback)
+; Exclude identifiers that are keywords in closing tags
+(statement_list
+  (identifier) @variable)
 
 ; ============================================================================
 ; Operators
