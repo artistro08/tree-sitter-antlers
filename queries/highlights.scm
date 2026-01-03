@@ -152,21 +152,28 @@
   property: (identifier) @property)
 
 ; Parameter names: {{ tag param="value" }} or {{ tag w=100 }}
-(parameter
+((parameter
   name: (identifier) @property)
+ (#set! "priority" 110))
 
-; Parameter values (string, number, boolean)
-(parameter
+; Parameter values (string, number, boolean, identifier)
+; Note: values are already highlighted by general rules above,
+; but we set priority to ensure consistency
+((parameter
   value: (string) @string)
+ (#set! "priority" 110))
 
-(parameter
+((parameter
   value: (number) @number)
+ (#set! "priority" 110))
 
-(parameter
+((parameter
   value: (boolean) @constant.builtin)
+ (#set! "priority" 110))
 
-(parameter
+((parameter
   value: (identifier) @variable)
+ (#set! "priority" 110))
 
 ; ============================================================================
 ; Variables
