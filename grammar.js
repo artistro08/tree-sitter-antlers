@@ -46,7 +46,10 @@ module.exports = grammar({
     $.noparse_content,
   ],
 
-  conflicts: ($) => [[$._expression, $.tag_name, $.tag_path]],
+  conflicts: ($) => [
+    [$.variable, $.tag_path],
+    [$.ternary_expression, $.variable],
+  ],
 
   word: ($) => $.identifier,
 
@@ -122,11 +125,15 @@ module.exports = grammar({
         $.array_access,
       ),
 
-    // Variable access: {{ variable.nested }} (prefer dot over colon to avoid ternary conflicts)
+    // Variable access: {{ variable:nested }} or {{ variable.nested }}
+    // Use negative dynamic precedence to prefer ternary when ambiguous
     variable: ($) =>
-      prec.left(
-        PREC.MEMBER,
-        seq($.identifier, repeat1(seq(".", $.identifier))),
+      prec.dynamic(
+        -1,
+        prec.left(
+          PREC.MEMBER,
+          seq($.identifier, repeat1(seq(choice(":", "."), $.identifier))),
+        ),
       ),
 
     // Tag: {{ tag:method param="value" }} or {{ tag:path:to:method param="value" }}
@@ -294,15 +301,19 @@ module.exports = grammar({
       prec.right(PREC.UNARY, seq(choice("!", "-", "not"), $._expression)),
 
     // Ternary expression: {{ condition ? 'yes' : 'no' }}
+    // Higher precedence and dynamic precedence to win over variable
     ternary_expression: ($) =>
-      prec.right(
-        PREC.TERNARY,
-        seq(
-          field("condition", $._expression),
-          "?",
-          field("consequence", $._expression),
-          ":",
-          field("alternative", $._expression),
+      prec.dynamic(
+        10,
+        prec.right(
+          PREC.MEMBER + 1,
+          seq(
+            field("condition", $._expression),
+            "?",
+            field("consequence", $._expression),
+            ":",
+            field("alternative", $._expression),
+          ),
         ),
       ),
 
