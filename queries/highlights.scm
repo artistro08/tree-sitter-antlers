@@ -221,6 +221,30 @@
 (parameter
   value: (identifier) @variable)
 
+; Tag parameter names and values (unified rule for tags with colon-prefix support)
+; Tag parameter names: {{ tag param="value" }} or {{ tag :param="value" }}
+(tag_parameter
+  name: (parameter_name) @property)
+
+(tag_parameter
+  name: (identifier) @property)
+
+; Tag parameter string values
+(tag_parameter
+  value: (string) @string)
+
+; Tag parameter number values
+(tag_parameter
+  value: (number) @number)
+
+; Tag parameter boolean values
+(tag_parameter
+  value: (boolean) @constant.builtin)
+
+; Tag parameter identifier values
+(tag_parameter
+  value: (identifier) @variable)
+
 ; Property access: {{ variable.property }} or {{ variable:property }}
 (property_access
   property: (identifier) @property)

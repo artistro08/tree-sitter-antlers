@@ -1591,6 +1591,10 @@
         {
           "type": "parameter",
           "named": true
+        },
+        {
+          "type": "tag_parameter",
+          "named": true
         }
       ]
     }
@@ -2204,6 +2208,52 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "tag_parameter",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "parameter_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

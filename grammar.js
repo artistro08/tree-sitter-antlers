@@ -49,6 +49,7 @@ module.exports = grammar({
   conflicts: ($) => [
     [$.variable, $.tag_path],
     [$.tag_name, $.tag_path],
+    [$._expression, $.tag_name],
   ],
 
   word: ($) => $.identifier,
@@ -146,14 +147,14 @@ module.exports = grammar({
     // Use token.immediate for colon to require no whitespace
     tag: ($) =>
       prec.dynamic(
-        -10,
+        5,
         prec.left(
           seq(
             choice(
-              prec(2, $.tag_path),
+              prec.dynamic(10, prec(2, $.tag_path)),
               seq($.tag_name, optional(seq(token.immediate(":"), $.tag_method))),
             ),
-            $.parameters,
+            alias($.tag_parameters, $.parameters),
           ),
         ),
       ),
@@ -178,6 +179,23 @@ module.exports = grammar({
         ),
         optional($.parameters),
         "}",
+      ),
+
+    // Tag-specific parameters with high precedence to consume all parameters
+    tag_parameters: ($) =>
+      prec.right(100,
+        repeat1($.tag_parameter),
+      ),
+
+    // Unified parameter rule for tags (handles both normal and colon-prefixed)
+    tag_parameter: ($) =>
+      seq(
+        field("name", choice(
+          prec.dynamic(100, seq(":", $.identifier)),  // Colon-prefixed: :url
+          $.parameter_name,  // Normal or namespaced: src, glide:width
+        )),
+        "=",
+        field("value", choice($.string, $.number, $.boolean, $.identifier)),
       ),
 
     // Parameters for tags (at least one parameter required to distinguish from variable)
