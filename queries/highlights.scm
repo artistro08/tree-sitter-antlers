@@ -37,6 +37,24 @@
 ; Strings
 (string) @string
 
+; String content inside double-quoted strings
+(string_content) @string
+
+; Escape sequences in strings
+(escape_sequence) @string.escape
+
+; String interpolation braces
+(string_interpolation
+  "{" @punctuation.special
+  "}" @punctuation.special)
+
+; Variables inside string interpolation
+(string_interpolation
+  (variable) @variable)
+
+(string_interpolation
+  (identifier) @variable)
+
 ; Numbers
 (number) @number
 

@@ -14,8 +14,7 @@ Tag with parameter
           (identifier))
         (parameters
           (parameter
-            name: (parameter_name
-              (identifier))
+            name: (parameter_name)
             value: (string)))))))
 
 ================================================================================
@@ -36,8 +35,7 @@ Tag with method and parameter
           (identifier))
         (parameters
           (parameter
-            name: (parameter_name
-              (identifier))
+            name: (parameter_name)
             value: (string)))))))
 
 ================================================================================
@@ -58,12 +56,10 @@ Tag with multiple parameters
           (identifier))
         (parameters
           (parameter
-            name: (parameter_name
-              (identifier))
+            name: (parameter_name)
             value: (string))
           (parameter
-            name: (parameter_name
-              (identifier))
+            name: (parameter_name)
             value: (string)))))))
 
 ================================================================================
@@ -82,8 +78,7 @@ Tag with dynamic binding parameter
           (identifier))
         (parameters
           (parameter
-            name: (parameter_name
-              (identifier))
+            name: (parameter_name)
             value: (string)))))))
 
 ================================================================================

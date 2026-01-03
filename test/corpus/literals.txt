@@ -22,7 +22,99 @@ String with double quotes
 (template
   (antlers_node
     (statement_list
-      (string))))
+      (string
+        (string_content)))))
+
+================================================================================
+String with interpolation - simple variable
+================================================================================
+
+{{ "{form}" }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (string
+        (string_interpolation
+          (identifier))))))
+
+================================================================================
+String with interpolation - nested variable
+================================================================================
+
+{{ "{form:handle}" }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (string
+        (string_interpolation
+          (variable
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+String with mixed content and interpolation
+================================================================================
+
+{{ "Hello {name}, welcome!" }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (string
+        (string_content)
+        (string_interpolation
+          (identifier))
+        (string_content)))))
+
+================================================================================
+Tag with interpolated parameter value
+================================================================================
+
+{{ form:create in="{form:handle}" }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (tag
+        (tag_name
+          (identifier))
+        (tag_method
+          (identifier))
+        (parameters
+          (parameter
+            name: (parameter_name)
+            value: (string
+              (string_interpolation
+                (variable
+                  (identifier)
+                  (identifier))))))))))
+
+================================================================================
+String with escape sequence
+================================================================================
+
+{{ "hello \"world\"" }}
+
+--------------------------------------------------------------------------------
+
+(template
+  (antlers_node
+    (statement_list
+      (string
+        (string_content)
+        (escape_sequence)
+        (string_content)
+        (escape_sequence)))))
 
 ================================================================================
 Integer number
