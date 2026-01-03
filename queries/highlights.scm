@@ -155,9 +155,10 @@
 (tag_method
   (identifier) @variable)
 
-; Tag names: {{ collection }}
+; Tag names: {{ partial }} {{ content }} {{ collection }}
+; Highlight as variable for consistency
 (tag_name
-  (identifier) @function)
+  (identifier) @variable)
 
 ; Tag paths: {{ glide:site_settings:image }}
 ; Highlight as variable to match variable syntax like user:name:field
@@ -173,14 +174,14 @@
 (closing_tag
   (variable) @variable)
 
-; Closing tags for other constructs: {{ /collection }}
+; Closing tags for other constructs: {{ /content }} {{ /partial }}
 ; This must come before the keyword pattern so keywords can override it
 (closing_tag
-  (identifier) @function)
+  (identifier) @variable)
 
 ; Closing tags for keywords: {{ /if }} {{ /unless }} {{ /switch }}
 ; These should be highlighted as keywords to match their opening tags
-; This comes last so it overrides the general function rule above
+; This comes last so it overrides the general variable rule above
 ((closing_tag
   (identifier) @keyword)
  (#match? @keyword "^(if|unless|switch)$"))
